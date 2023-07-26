@@ -1,22 +1,19 @@
 import { View, Text, Pressable, Image, StyleSheet } from "react-native";
+import MealItemFooter from "./MealItemFooter";
 
-const MealItem = ({ meal }) => {
+const MealItem = ({ meal, onPress }) => {
   return (
     <View style={styles.mealItem}>
-      <Pressable android_ripple={{ color: '#ccc' }}>
+      <Pressable android_ripple={{ color: "#ccc" }} onPress={onPress}>
         <View>
           <Image source={{ uri: meal.imageUrl }} style={styles.image} />
           <Text style={styles.title}>{meal.title}</Text>
         </View>
-        <View style={styles.mealItemFooter}>
-          <Text style={styles.mealItemFooterItem}>{meal.duration}m</Text>
-          <Text style={styles.mealItemFooterItem}>
-            {meal.complexity.toUpperCase()}
-          </Text>
-          <Text style={styles.mealItemFooterItem}>
-            {meal.affordability.toUpperCase()}
-          </Text>
-        </View>
+        <MealItemFooter
+          affordability={meal.affordability}
+          complexity={meal.complexity}
+          duration={meal.duration}
+        />
       </Pressable>
     </View>
   );
