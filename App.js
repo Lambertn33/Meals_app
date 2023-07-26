@@ -2,17 +2,31 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsScreen from "./screens/MealsScreen";
 import MealDetailsScreen from "./screens/MealDetailsScreen";
+import FavoriteMealsScreen from "./screens/FavoriteMealsScreen";
+
+import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigation = () => {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="categories" component={CategoriesScreen} />
+      <Drawer.Screen name="favorites" component={FavoriteMealsScreen} />
+    </Drawer.Navigator>
+  );
+};
 
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="CategoriesScreen"
@@ -28,7 +42,7 @@ export default function App() {
           }}
         >
           <Stack.Screen name="MealsScreen" component={MealsScreen} />
-          <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
+          <Stack.Screen name="CategoriesScreen" component={DrawerNavigation} />
           <Stack.Screen
             name="MealDetailsScreen"
             component={MealDetailsScreen}
